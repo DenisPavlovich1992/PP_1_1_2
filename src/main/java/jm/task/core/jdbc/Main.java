@@ -16,6 +16,7 @@ public class Main {
         System.out.println(userDaoJDBC.getAllUsers());
         userDaoJDBC.cleanUsersTable();
         userDaoJDBC.dropUsersTable();
+        System.out.println("Finish");
 
     }
 }
