@@ -20,7 +20,6 @@ public class UserDaoHibernateImpl implements UserDao {
             session.createNativeQuery("create table if not exists User (id bigint not null auto_increment, name varchar(255), lastName varchar(255), age tinyint, primary key (id))").executeUpdate();
             session.getTransaction().commit();
         }
-
     }
 
     @Override
