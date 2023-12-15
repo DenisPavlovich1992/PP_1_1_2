@@ -12,28 +12,34 @@ import java.util.List;
 
 public class UserServiceImpl implements UserService {
     Connection connection = Util.getConnection();
+
     public void createUsersTable() {
-        String createTableSQL = "CREATE TABLE USER " + "(id BIGINT AUTO_INCREMENT PRIMARY KEY, " +
-                "name VARCHAR(255), " + "lastName VARCHAR(255), " + "age TINYINT)";
+        String createTableSQL = "CREATE TABLE IF NOT EXISTS USER " +
+                "(id BIGINT AUTO_INCREMENT PRIMARY KEY, " +
+                "name VARCHAR(255), " +
+                "lastName VARCHAR(255), " +
+                "age TINYINT)";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(createTableSQL)) {
             preparedStatement.executeUpdate();
-            System.out.println("Таблица USER создана успешно!");
+            System.out.println("Таблица USER создана успешно или уже существует!");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
+
     public void dropUsersTable() {
-        String dropTableSQL = "DROP TABLE USER";
+        String dropTableSQL = "DROP TABLE IF EXISTS USER";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(dropTableSQL)) {
             preparedStatement.executeUpdate();
-            System.out.println("Таблица USER удалена успешно!");
+            System.out.println("Таблица USER удалена успешно или не существовала!");
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
 
     public void saveUser(String name, String lastName, byte age) {
         String insertUserSQL = "INSERT INTO USER (name, lastName, age) VALUES (?, ?, ?)";
