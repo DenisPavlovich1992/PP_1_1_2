@@ -20,6 +20,9 @@ public class UserDaoHibernateImpl implements UserDao {
             session.createNativeQuery("create table if not exists User (id bigint not null auto_increment, name varchar(255), lastName varchar(255), age tinyint, primary key (id))").executeUpdate();
             session.getTransaction().commit();
         }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -28,6 +31,9 @@ public class UserDaoHibernateImpl implements UserDao {
             session.beginTransaction();
             session.createNativeQuery("drop table if exists User").executeUpdate();
             session.getTransaction().commit();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -39,6 +45,9 @@ public class UserDaoHibernateImpl implements UserDao {
             session.save(us);
             session.getTransaction().commit();
         }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -47,6 +56,9 @@ public class UserDaoHibernateImpl implements UserDao {
             session.beginTransaction();
             session.delete(session.get(User.class, id));
             session.getTransaction().commit();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -58,6 +70,10 @@ public class UserDaoHibernateImpl implements UserDao {
             session.getTransaction().commit();
             return users;
         }
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 
@@ -67,6 +83,9 @@ public class UserDaoHibernateImpl implements UserDao {
             session.beginTransaction();
             session.createQuery("delete from User").executeUpdate();
             session.getTransaction().commit();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
