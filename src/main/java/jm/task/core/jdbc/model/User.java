@@ -7,6 +7,8 @@ import java.util.Objects;
 @Table
 public class User {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id") //если имя переменной совпадает, можно не прописывать name
     private Long id;
 
     @Column(name="name")
